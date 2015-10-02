@@ -23,11 +23,13 @@ class ChecklistViewController: UITableViewController
     // Dispose of any resources that can be recreated.
   } // didReceiveMemoryWarning
   
+  // how many rows are there?
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
     return 100
-  } // tableView()
+  } // tableView numberOfRowsInSection
   
+  // fill in cell label values, based on cell number
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
   {
     let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem", forIndexPath: indexPath)
@@ -56,7 +58,26 @@ class ChecklistViewController: UITableViewController
     }
     
     return cell
-  } // tableView()
+  } // tableView cellForRowAtIndexPath
+  
+  // toggle the checkmark on & off
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+  {
+    if let cell = tableView.cellForRowAtIndexPath(indexPath)
+    {
+      if cell.accessoryType == .None
+      {
+        cell.accessoryType = .Checkmark
+      }
+      else
+      {
+        cell.accessoryType = .None
+      }
+    } // if let cell
+    
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
+  } // tableView didSelectRowAtIndexPath
   
 } // class ChecklistViewController
 
