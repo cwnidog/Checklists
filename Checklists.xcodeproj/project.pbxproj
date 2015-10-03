@@ -56,15 +56,39 @@
 		5D57AEC51BBF2E8A00A0E686 /* Checklists */ = {
 			isa = PBXGroup;
 			children = (
-				5D57AEC61BBF2E8A00A0E686 /* AppDelegate.swift */,
-				5D57AEC81BBF2E8A00A0E686 /* ChecklistViewController.swift */,
-				5D57AEDB1BBF49B300A0E686 /* ChecklistItem.swift */,
-				5D57AECA1BBF2E8A00A0E686 /* Main.storyboard */,
+				5D57AEDF1BC080AB00A0E686 /* Models */,
+				5D57AEDE1BC0809200A0E686 /* Views */,
+				5D57AEDD1BC0807A00A0E686 /* Controllers */,
 				5D57AECD1BBF2E8A00A0E686 /* Assets.xcassets */,
-				5D57AECF1BBF2E8A00A0E686 /* LaunchScreen.storyboard */,
 				5D57AED21BBF2E8A00A0E686 /* Info.plist */,
 			);
 			path = Checklists;
+			sourceTree = "<group>";
+		};
+		5D57AEDD1BC0807A00A0E686 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D57AEC61BBF2E8A00A0E686 /* AppDelegate.swift */,
+				5D57AEC81BBF2E8A00A0E686 /* ChecklistViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5D57AEDE1BC0809200A0E686 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D57AECF1BBF2E8A00A0E686 /* LaunchScreen.storyboard */,
+				5D57AECA1BBF2E8A00A0E686 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5D57AEDF1BC080AB00A0E686 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5D57AEDB1BBF49B300A0E686 /* ChecklistItem.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +312,7 @@
 				5D57AED71BBF2E8A00A0E686 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
