@@ -12,6 +12,8 @@ protocol AddItemViewControllerDelegate: class
 {
   func addItemViewControllerDidCancel(controller: AddItemViewController)
   func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
+
 } // protocol AddItemViewControllerDelegate
 
 class AddItemViewController: UITableViewController, UITextFieldDelegate
@@ -23,11 +25,19 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
   
   @IBAction func done()
   {
-    let item = ChecklistItem()
-    item.text = textField.text!
-    item.checked = false
+    if let item = itemToEdit
+    {
+      item.text = textField.text!
+      delegate?.addItemViewController(self, didFinishEditingItem: item)
+    }
     
-    delegate?.addItemViewController(self, didFinishAddingItem: item)
+    else
+    {
+      let item = ChecklistItem()
+      item.text = textField.text!
+      item.checked = false
+      delegate?.addItemViewController(self, didFinishAddingItem: item)
+    }
   } // done()
   
   @IBOutlet weak var textField: UITextField!
@@ -35,6 +45,8 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
   
   weak var delegate: AddItemViewControllerDelegate?
+  
+  var itemToEdit: ChecklistItem?
   
   override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
   {
@@ -47,6 +59,18 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
     textField.becomeFirstResponder()
   } // viewWillAppear()
   
+  override func viewDidLoad()
+  {
+    super.viewDidLoad()
+    
+    if let item = itemToEdit
+    {
+      title = "Edit Item"
+      textField.text = item.text
+      doneBarButton.enabled = true
+    }
+  } // viewDidLoad
+  
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
                  replacementString string: String) -> Bool
   {
@@ -56,5 +80,6 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
     doneBarButton.enabled = (newText.length > 0)
     return true
   } // textField shouldChangeCharactersInRange
+  
   
 } // class AddItemViewController
