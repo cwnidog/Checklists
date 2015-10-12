@@ -1,5 +1,5 @@
 //
-//  AddItemViewController.swift
+//  ItemDetailViewController.swift
 //  Checklists
 //
 //  Created by John Leonard on 10/3/15.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol AddItemViewControllerDelegate: class
+protocol ItemDetailViewControllerDelegate: class
 {
-  func addItemViewControllerDidCancel(controller: AddItemViewController)
-  func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
-  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
+  func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem)
 
-} // protocol AddItemViewControllerDelegate
+} // protocol ItemDetailViewControllerDelegate
 
-class AddItemViewController: UITableViewController, UITextFieldDelegate
+class ItemDetailViewController: UITableViewController, UITextFieldDelegate
 {
   @IBAction func cancel()
   {
-    delegate?.addItemViewControllerDidCancel(self)
+    delegate?.itemDetailViewControllerDidCancel(self)
   } // cancel()
   
   @IBAction func done()
@@ -28,7 +28,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
     if let item = itemToEdit
     {
       item.text = textField.text!
-      delegate?.addItemViewController(self, didFinishEditingItem: item)
+      delegate?.itemDetailViewController(self, didFinishEditingItem: item)
     }
     
     else
@@ -36,7 +36,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
       let item = ChecklistItem()
       item.text = textField.text!
       item.checked = false
-      delegate?.addItemViewController(self, didFinishAddingItem: item)
+      delegate?.itemDetailViewController(self, didFinishAddingItem: item)
     }
   } // done()
   
@@ -44,7 +44,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
   
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
   
-  weak var delegate: AddItemViewControllerDelegate?
+  weak var delegate: ItemDetailViewControllerDelegate?
   
   var itemToEdit: ChecklistItem?
   
@@ -82,4 +82,4 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate
   } // textField shouldChangeCharactersInRange
   
   
-} // class AddItemViewController
+} // class ItemDetailViewController
