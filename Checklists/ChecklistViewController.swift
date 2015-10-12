@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate
+class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate
 {
   var items: [ChecklistItem]
   
@@ -130,12 +130,12 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
   } // configureTextForCell withChecklistItem
   
  
-  func addItemViewControllerDidCancel(controller: AddItemViewController)
+  func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
   {
     dismissViewControllerAnimated(true, completion: nil)
-  } // addItemViewControllerDidCancel()
+  } // itemDetailViewControllerDidCancel()
   
-  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem)
   {
     if let index = items.indexOf(item)
     {
@@ -147,9 +147,9 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       }
     }
     dismissViewControllerAnimated(true, completion: nil)
-  } // addItemViewController didFinishEditingItem
+  } // itemDetailViewController didFinishEditingItem
   
-  func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
   {
     let newRowIndex = items.count
     items.append(item)
@@ -159,14 +159,14 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
     
     dismissViewControllerAnimated(true, completion: nil)
-  } // addItemViewController didFinishAddingItem
+  } // itemDetailViewController didFinishAddingItem
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
   {
     if segue.identifier == "AddItem"
     {
       let navigationController = segue.destinationViewController as! UINavigationController
-      let controller = navigationController.topViewController as! AddItemViewController
+      let controller = navigationController.topViewController as! ItemDetailViewController
       
       controller.delegate = self
     } // if identifier == AddItem
@@ -174,7 +174,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     else if segue.identifier == "EditItem"
     {
       let navigationController = segue.destinationViewController as! UINavigationController
-      let controller = navigationController.topViewController as! AddItemViewController
+      let controller = navigationController.topViewController as! ItemDetailViewController
       controller.delegate = self
       
       if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
